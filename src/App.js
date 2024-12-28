@@ -25,6 +25,7 @@ import PaymentCancelled from "./pages/payment/PaymentCancelled";
 import ManageInventoryByVendor from "./components/dashboards/ManageInventoryByVendor";
 import MonitorTransactions from "./components/dashboards/MonitorTransactions";
 import AllShops from "./pages/AllShops";
+import Blog from "./pages/Blog";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/allShops" element={<AllShops />} />
+          <Route path="/blog" element={<Blog />} />
           <Route
             path="/products/:categoryId"
             element={<AllProductsCategoryFiltered />}
