@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../provider/UserContext";
 import { CiLocationArrow1 } from "react-icons/ci";
+import NavLinks from "./shared/NavLinks";
 
 const Navbar = () => {
   const { user, logout } = useUser();
@@ -26,7 +27,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar shadow-sm px-6 py-4 w-full lg:w-3/4 mx-auto bg-white">
+    <div className="navbar shadow-sm px-6 py-4 w-full lg:w-3/4 mx-auto flex flex-col lg:flex-row">
       <div className="flex-1">
         <Link to="/" className="flex items-center gap-1">
           <img
@@ -34,12 +35,13 @@ const Navbar = () => {
             alt="logo"
             className="w-9"
           />
-          <span className="text-xl font-extrabold bg-gradient-to-tr bg-clip-text text-transparent from-green-700 via-black to-red-500">
+          <span className="text-xl font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-green-600  to-red-600">
             E-Commerce
           </span>
         </Link>
       </div>
       <div className="flex items-center gap-3 text-sm font-semibold">
+        <NavLinks />
         {user ? (
           <div className="flex items-center gap-4 relative">
             {/* User Avatar */}

@@ -16,15 +16,11 @@ const Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productResponse = await axiosInstance.get(
-          "/api/products"
-        );
+        const productResponse = await axiosInstance.get("/api/products");
         setProducts(productResponse.data);
         setFilteredProducts(productResponse.data); // Initially show all products
 
-        const categoryResponse = await axiosInstance.get(
-          "/api/categories"
-        );
+        const categoryResponse = await axiosInstance.get("/api/categories");
         setCategories(categoryResponse.data); // Fetch categories dynamically
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -71,23 +67,24 @@ const Products = () => {
   const title = "Products";
   return (
     <>
-      <div>
-        <Title title={title} />
-      </div>
+      <div id="products">
+        <div>
+          <Title title={title} />
+        </div>
 
-      {/* Filter and Search Section */}
-      <div className="mb-4 flex flex-col items-center sm:flex-row gap-4">
-        {/* Search by Keyword */}
-        <input
-          type="text"
-          placeholder="Search by keyword"
-          value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
-          className="p-2 border rounded"
-        />
+        {/* Filter and Search Section */}
+        <div className="mb-4 flex flex-col items-center sm:flex-row gap-4">
+          {/* Search by Keyword */}
+          <input
+            type="text"
+            placeholder="Search by keyword"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            className="p-2 border rounded"
+          />
 
-        {/* Filter by Category */}
-        {/* <select
+          {/* Filter by Category */}
+          {/* <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="p-2 border rounded"
@@ -99,40 +96,41 @@ const Products = () => {
             </option>
           ))}
         </select> */}
-        <span>Price range:</span>
-        {/* Filter by Price Range */}
-        <div className="flex gap-4">
-          <input
-            type="number"
-            value={minPrice}
-            onChange={(e) => setMinPrice(Number(e.target.value))}
-            placeholder="Min Price"
-            className="p-2 border rounded"
-          />
-          <input
-            type="number"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(Number(e.target.value))}
-            placeholder="Max Price"
-            className="p-2 border rounded"
-          />
-        </div>
-      </div>
-
-      {/* Display filtered products */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-              onAddRecentlyViewed={onAddRecentlyViewed}
+          <span>Price range:</span>
+          {/* Filter by Price Range */}
+          <div className="flex gap-4">
+            <input
+              type="number"
+              value={minPrice}
+              onChange={(e) => setMinPrice(Number(e.target.value))}
+              placeholder="Min Price"
+              className="p-2 border rounded"
             />
-          ))
-        ) : (
-          <div className="text-red-600"> No products found</div>
-        )}
+            <input
+              type="number"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              placeholder="Max Price"
+              className="p-2 border rounded"
+            />
+          </div>
+        </div>
+
+        {/* Display filtered products */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={onAddToCart}
+                onAddRecentlyViewed={onAddRecentlyViewed}
+              />
+            ))
+          ) : (
+            <div className="text-red-600"> No products found</div>
+          )}
+        </div>
       </div>
     </>
   );
