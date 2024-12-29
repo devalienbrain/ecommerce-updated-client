@@ -55,10 +55,10 @@ const Blog = () => {
       <Title title="Blog" />
 
       {/* Add Blog Button */}
-      <div className="flex justify-end mb-4">
+      <div className="flex  mb-4">
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          className="flex items-center gap-2  py-2 px-4 rounded hover:bg-slate-100 text-xs border"
         >
           <AiOutlinePlusCircle size={24} />
           Add Blog
@@ -71,7 +71,7 @@ const Blog = () => {
           blogs.map((blog) => (
             <div
               key={blog.id}
-              className="flex gap-4 p-4 border rounded shadow bg-white dark:bg-gray-800"
+              className="flex gap-4 p-4 border rounded shadow bg-white"
             >
               <img
                 src={blog.imageUrl}
@@ -79,13 +79,9 @@ const Blog = () => {
                 className="w-1/3 h-40 object-cover rounded"
               />
               <div>
-                <h2 className="text-lg font-bold text-gray-800 dark:text-white">
-                  {blog.title}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  {blog.details}
-                </p>
-                <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+                <h2 className="text-lg font-bold">{blog.title}</h2>
+                <p className="text-gray-600 mt-2">{blog.details}</p>
+                <div className="text-sm text-gray-500  mt-4">
                   By: {blog.author} |{" "}
                   {new Date(blog.createdAt).toLocaleString()}
                 </div>

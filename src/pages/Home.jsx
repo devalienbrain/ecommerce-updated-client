@@ -28,6 +28,7 @@ import Banner from "../components/Banner";
 import Products from "./Products";
 import Categories from "./Categories";
 import Navbar from "../components/Navbar";
+import OfferSection from "../components/OfferSection";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,13 +50,14 @@ const Home = () => {
     <>
       <div
         className={`sticky top-0 z-50 transition-colors duration-300 ${
-          isScrolled ? "bg-white text-black" : "bg-black text-white"
+          isScrolled ? "bg-white text-black" : "bg-black text-white shadow-xl"
         }`}
       >
         <Navbar />
       </div>
       <div className="px-6 py-4 w-full lg:w-3/4 mx-auto my-6 min-h-screen">
         <Banner />
+        <OfferSection />
         <Categories />
         <div className="mt-16">
           <Products />
