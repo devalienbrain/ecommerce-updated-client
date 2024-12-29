@@ -29,6 +29,7 @@ import Products from "./Products";
 import Categories from "./Categories";
 import Navbar from "../components/Navbar";
 import OfferSection from "../components/OfferSection";
+import ReviewSection from "../components/ReviewSection";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,6 +63,7 @@ const Home = () => {
         <div className="mt-16">
           <Products />
         </div>
+        <ReviewSection />
       </div>
     </>
   );
