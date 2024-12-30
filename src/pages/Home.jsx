@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import OfferSection from "../components/OfferSection";
 import ReviewSection from "../components/ReviewSection";
 import BannerCarousel from "../components/BannerCarousel";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,6 +41,9 @@ const Home = () => {
           <Products />
         </div>
         <ReviewSection />
+      </div>
+      <div className="bg-gray-50 ">
+        <Footer />
       </div>
     </>
   );
