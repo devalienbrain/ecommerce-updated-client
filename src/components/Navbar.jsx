@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../provider/UserContext";
-import { CiLocationArrow1, CiLogout, CiMenuBurger } from "react-icons/ci";
+import {
+  CiLocationArrow1,
+  CiLogout,
+  CiMenuBurger,
+  CiUser,
+} from "react-icons/ci";
 import NavLinks from "./shared/NavLinks";
 
 const Navbar = () => {
@@ -9,9 +14,6 @@ const Navbar = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const detailsRef = useRef(null);
-
-  const adminAvatar = "https://i.ibb.co/qjQ0dt1/manager.png";
-  const userAvatar = "https://i.ibb.co/VvKP7TQ/user.png";
 
   // Close details when clicking outside
   useEffect(() => {
@@ -28,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar shadow-sm px-6 py-4 w-full lg:w-3/4 mx-auto flex flex-col lg:flex-row justify-between items-center">
+    <div className="navbar shadow-sm px-6 py-4 max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center">
       <div className="flex items-center justify-between w-full">
         <Link to="/" className="flex items-center gap-1">
           <img
@@ -68,12 +70,7 @@ const Navbar = () => {
               aria-expanded={showDetails}
               aria-label="User menu"
             >
-              <img
-                src={user?.role === "Admin" ? adminAvatar : userAvatar}
-                alt="User Avatar"
-                className="w-9 h-9 rounded-full border-gray-600 p-1 object-cover"
-                onError={(e) => (e.target.src = userAvatar)}
-              />
+              <CiUser className="w-8 h-8" />
             </div>
 
             {/* User Details Popup */}

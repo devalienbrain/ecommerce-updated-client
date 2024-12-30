@@ -10,7 +10,7 @@ import { MdLocationOn } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="py-8 px-6 w-full lg:w-3/4 mx-auto">
+    <footer className="py-8 px-6 max-w-7xl mx-auto">
       <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
         {/* Left Side: Logo, Website Name, and Address */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-0">

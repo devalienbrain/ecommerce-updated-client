@@ -32,8 +32,10 @@ const Home = () => {
       >
         <Navbar />
       </div>
-      <div className="px-6 w-full lg:w-3/4 mx-auto min-h-screen">
+      <div>
         <BannerCarousel />
+      </div>
+      <div className="px-6 min-h-screen max-w-7xl mx-auto">
         {/* <Banner /> */}
         <OfferSection />
         <Categories />
