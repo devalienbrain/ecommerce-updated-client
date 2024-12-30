@@ -1,6 +1,7 @@
 // ReviewSection.jsx
 import React, { useEffect, useState } from "react";
 import "./animate.css";
+import Title from "./shared/Title";
 const ReviewSection = () => {
   const [reviews, setReviews] = useState([]);
   const [paused, setPaused] = useState(false);
@@ -43,9 +44,7 @@ const ReviewSection = () => {
 
   return (
     <div className="py-20">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-        Customer Reviews
-      </h2>
+      <Title title="Customer Reviews" />
       <div
         className="overflow-hidden relative"
         onMouseEnter={() => setPaused(true)}
