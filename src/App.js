@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Footer from "./components/Footer";
 import Dashboard from "./pages/dashboard/Dashboard";
 import { UserProvider } from "./provider/UserContext";
 import Profile from "./components/dashboards/Profile";
@@ -26,23 +24,26 @@ import ManageInventoryByVendor from "./components/dashboards/ManageInventoryByVe
 import MonitorTransactions from "./components/dashboards/MonitorTransactions";
 import AllShops from "./pages/AllShops";
 import Blog from "./pages/Blog";
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   return (
     <Router>
       <UserProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/allShops" element={<AllShops />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route
-            path="/products/:categoryId"
-            element={<AllProductsCategoryFiltered />}
-          />
-
-          <Route path="/product/:productId" element={<ProductDetails />} />
+          {/* Main layout for pages with Navbar and Footer */}
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="allShops" element={<AllShops />} />
+            <Route path="blog" element={<Blog />} />
+            <Route
+              path="products/:categoryId"
+              element={<AllProductsCategoryFiltered />}
+            />
+            <Route path="product/:productId" element={<ProductDetails />} />
+          </Route>
           {/* Dashboard route with nested routes */}
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="" element={<Profile />} />
