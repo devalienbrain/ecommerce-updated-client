@@ -54,7 +54,7 @@ const Navbar = () => {
               <img
                 src={user?.role === "Admin" ? adminAvatar : userAvatar}
                 alt="User Avatar"
-                className="w-9 h-9 rounded-full"
+                className="w-8 h-8 rounded-full bg-yellow-100 p-1"
                 onError={(e) => (e.target.src = userAvatar)}
               />
             </div>

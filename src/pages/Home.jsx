@@ -52,7 +52,7 @@ const Home = () => {
     <>
       <div
         className={`sticky top-0 z-50 transition-colors duration-300 ${
-          isScrolled ? "bg-white  shadow-xl" : "bg-slate-50"
+          isScrolled ? "bg-white  shadow-xl" : "bg-black text-white"
         }`}
       >
         <Navbar />
