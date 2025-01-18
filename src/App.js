@@ -25,6 +25,7 @@ import MonitorTransactions from "./components/dashboards/MonitorTransactions";
 import AllShops from "./pages/AllShops";
 import Blog from "./pages/Blog";
 import MainLayout from "./layout/MainLayout";
+import Products from "./pages/Products";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           {/* Main layout for pages with Navbar and Footer */}
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
+            <Route path="products" element={<Products />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="allShops" element={<AllShops />} />

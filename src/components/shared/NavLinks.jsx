@@ -21,7 +21,7 @@ const NavLinks = () => {
       <Link to="/#categories">
         <span className="hover:text-cyan-400">categories</span>
       </Link>
-      <Link to="/#products">
+      <Link to="/products">
         <span className="hover:text-cyan-400">products</span>
       </Link>
       <Link to="/allShops">
