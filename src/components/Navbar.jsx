@@ -1,116 +1,153 @@
-import React, { useState, useRef, useEffect } from "react";
+
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { CiMenuBurger, CiLogout, CiUser } from "react-icons/ci";
+import { CiLogout, CiUser } from "react-icons/ci";
+import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 import NavLinks from "./shared/NavLinks";
 import { useUser } from "../provider/UserContext";
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
-  const detailsRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useUser();
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (detailsRef.current && !detailsRef.current.contains(event.target)) {
-        setShowDetails(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   return (
-    <div className="navbar sticky top-0 z-50 bg-white  px-6 py-4 max-w-7xl mx-auto flex justify-between items-center font-semibold">
+    <nav className="navbar sticky top-0 z-50  px-4 lg:px-8 max-w-7xl mx-auto">
       {/* Logo Section */}
-      <Link to="/" className="flex items-center gap-2">
-        <img
-          src="https://i.ibb.co/wQ61YwM/ecommerce-logo.png"
-          alt="logo"
-          className="w-9 hover:scale-105 transition-transform"
-        />
-        <span className="text-2xl font-bold text-gray-800 hover:text-green-500 transition-colors">
-          E-Commerce
-        </span>
-      </Link>
+      <div className="navbar-start">
+        <Link to="/" className="flex items-center gap-2">
+          <img
+            src="https://i.ibb.co/wQ61YwM/ecommerce-logo.png"
+            alt="logo"
+            className="w-10 hover:scale-105 transition-transform"
+          />
+          <span className="text-xl font-bold text-primary hover:text-secondary transition-colors">
+            E-Commerce
+          </span>
+        </Link>
+      </div>
 
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setShowMenu((prev) => !prev)}
-        className="lg:hidden text-2xl text-gray-700 focus:outline-none focus:ring focus:ring-green-300"
-        aria-label="Toggle menu"
-      >
-        <CiMenuBurger />
-      </button>
+      {/* Navbar Links for Large Screens */}
+      <div className="navbar-center hidden lg:flex">
+        <NavLinks isMobile={false} />
+      </div>
 
-      {/* Nav Links and Profile Section */}
-      <div
-        className={`${
-          showMenu ? "block" : "hidden"
-        } lg:flex items-center gap-6 transition-all duration-300`}
-      >
-        {/* Nav Links */}
-        <NavLinks />
-
-        {/* Profile Dropdown */}
+      {/* User Actions */}
+      <div className="navbar-end hidden lg:flex items-center gap-4">
         {user ? (
-          <div className="relative">
-            <button
-              className="flex items-center gap-2 focus:outline-none focus:ring focus:ring-green-300"
-              onClick={() => setShowDetails((prev) => !prev)}
+          <div className="dropdown dropdown-end">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-circle avatar"
               aria-label="User menu"
             >
-              <CiUser className="text-2xl text-gray-700 hover:text-green-500 transition-colors" />
-            </button>
-            {showDetails && (
-              <div
-                ref={detailsRef}
-                className="absolute right-0 top-12 bg-white shadow-lg p-4 rounded-md border w-48 transition-transform duration-200 transform scale-95 hover:scale-100"
-              >
-                <p className="text-sm text-gray-600">
+              <CiUser className="text-2xl text-gray-700 hover:text-primary transition-colors" />
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-48"
+            >
+              <li>
+                <span className="text-sm text-gray-500">
                   {user?.email || "user@example.com"}
-                </p>
-                <Link
-                  to="/dashboard"
-                  className="block mt-3 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-                >
+                </span>
+              </li>
+              <li>
+                <Link to="/dashboard" className="hover:text-primary">
                   Dashboard
                 </Link>
-                {/* Logout Button */}
+              </li>
+              <li>
                 <button
                   onClick={() =>
                     window.confirm("Are you sure you want to logout?") &&
                     logout()
                   }
-                  className="px-4 py-2 rounded-3xl border border-red-600 hover:border-red-700 bg-red-600 hover:bg-red-700 text-white"
+                  className="text-red-500 hover:bg-red-100"
                 >
-                  <CiLogout className="inline-block mr-2" />
+                  <CiLogout className="mr-2" />
                   Logout
                 </button>
-              </div>
-            )}
+              </li>
+            </ul>
           </div>
         ) : (
           <>
-            {/* Login Button */}
             <Link to="/login">
-              <button className="px-4 py-2 rounded-md border border-green-400 hover:border-red-500 hover:bg-red-500 hover:text-white">
+              <button className="btn btn-ghost gap-2">
+                <FaSignInAlt />
                 Login
               </button>
             </Link>
-            {/* Register Button */}
             <Link to="/register">
-              <button className="px-4 py-2 rounded-md bg-green-600 border border-green-600 hover:border-green-500 hover:bg-green-500 text-white">
+              <button className="btn btn-primary gap-2">
+                <FaUserPlus />
                 Register
               </button>
             </Link>
           </>
         )}
       </div>
-    </div>
+
+      {/* Mobile Menu Toggle */}
+      <div className="navbar-end lg:hidden">
+        <button
+          className="btn btn-ghost btn-circle"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="navbar-dropdown w-full bg-base-100 shadow-lg rounded-md mt-2 p-4 lg:hidden">
+          <NavLinks isMobile={true} />
+          <div className="mt-4">
+            {user ? (
+              <button
+                onClick={() =>
+                  window.confirm("Are you sure you want to logout?") &&
+                  logout()
+                }
+                className="btn btn-error w-full"
+              >
+                <CiLogout className="mr-2" />
+                Logout
+              </button>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <Link to="/login">
+                  <button className="btn btn-outline w-full gap-2">
+                    <FaSignInAlt />
+                    Login
+                  </button>
+                </Link>
+                <Link to="/register">
+                  <button className="btn btn-primary w-full gap-2">
+                    <FaUserPlus />
+                    Register
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 
